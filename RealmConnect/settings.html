@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Settings - Realm Connect</title>
+    <style>
+        .settings-container {
+            display: flex;
+            height: calc(100vh - 60px);
+        }
+        .settings-sidebar {
+            width: 240px;
+            background-color: #2f3136;
+            padding: 60px 6px 60px 20px;
+        }
+        .settings-nav {
+            margin-bottom: 8px;
+        }
+        .settings-nav-item {
+            padding: 6px 10px;
+            margin-bottom: 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #b9bbbe;
+            font-size: 16px;
+            transition: all 0.15s ease;
+        }
+        .settings-nav-item:hover {
+            background-color: #393c43;
+            color: #dcddde;
+        }
+        .settings-nav-item.active {
+            background-color: #393c43;
+            color: #fff;
+        }
+        .settings-content {
+            flex: 1;
+            background-color: #36393f;
+            padding: 60px 40px;
+            overflow-y: auto;
+        }
+        .settings-section {
+            margin-bottom: 40px;
+        }
+        .settings-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .settings-item {
+            margin-bottom: 20px;
+        }
+        .settings-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #b9bbbe;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .settings-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            background-color: #202225;
+            border: 1px solid #202225;
+            border-radius: 4px;
+            color: #dcddde;
+            font-size: 16px;
+        }
+        .settings-input:focus {
+            outline: none;
+            border-color: #7289da;
+        }
+        .settings-button {
+            padding: 10px 20px;
+            background-color: #5865f2;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.17s ease;
+        }
+        .settings-button:hover {
+            background-color: #4752c4;
+        }
+        .settings-description {
+            color: #b9bbbe;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        .toggle-switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            background-color: #72767d;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .toggle-switch.active {
+            background-color: #5865f2;
+        }
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: #fff;
+            top: 3px;
+            left: 3px;
+            transition: left 0.2s;
+        }
+        .toggle-switch.active::after {
+            left: 23px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <a class="nav-button" href='home.html'>Home</a>
+        </div>
+        <h1 style="margin: 10; text-align: center;color: #3A86FF;">Realm Connect</h1>  
+        <div class="dropdown">
+            <button class="nav-button" style="padding: 5px;border: none; background-color: transparent; cursor: pointer;">
+                <img src="icon.jpg" alt="Menu" style="height: 32px; width: 32px; display: block; border-radius: 100%;">
+            </button>
+            <div class="dropdown-content">
+                <a href='profile.html'>Profile</a>
+                <a href='settings.html'>Settings</a>
+            </div>
+        </div>
+    </div>
+    <div class="settings-container">
+        <div class="settings-sidebar">
+            <div class="settings-nav">
+                <div class="settings-nav-item active">My Account</div>
+                <div class="settings-nav-item">Privacy & Safety</div>
+                <div class="settings-nav-item">Notifications</div>
+                <div class="settings-nav-item">Appearance</div>
+                <div class="settings-nav-item">Voice & Video</div>
+            </div>
+        </div>
+        <div class="settings-content">
+            <div class="settings-section">
+                <div class="settings-title">My Account</div>
+                <div class="settings-item">
+                    <div class="settings-label">Username</div>
+                    <input type="text" class="settings-input" value="YourUsername" placeholder="Enter username">
+                    <div class="settings-description">This is how others see you on Realm Connect</div>
+                </div>
+                <div class="settings-item">
+                    <div class="settings-label">Email</div>
+                    <input type="email" class="settings-input" value="your.email@example.com" placeholder="Enter email">
+                </div>
+                <div class="settings-item">
+                    <button class="settings-button">Save Changes</button>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="settings-title">Appearance</div>
+                <div class="settings-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center; max-width: 400px;">
+                        <div>
+                            <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">Dark Theme</div>
+                            <div class="settings-description" style="margin-top: 0;">Use dark theme across Realm Connect</div>
+                        </div>
+                        <div class="toggle-switch active"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="settings-title">Notifications</div>
+                <div class="settings-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center; max-width: 400px;">
+                        <div>
+                            <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">Desktop Notifications</div>
+                            <div class="settings-description" style="margin-top: 0;">Get notified of new messages</div>
+                        </div>
+                        <div class="toggle-switch active"></div>
+                    </div>
+                </div>
+                <div class="settings-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center; max-width: 400px;">
+                        <div>
+                            <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">Notification Sounds</div>
+                            <div class="settings-description" style="margin-top: 0;">Play sounds for notifications</div>
+                        </div>
+                        <div class="toggle-switch active"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
