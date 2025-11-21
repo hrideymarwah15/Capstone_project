@@ -1,0 +1,205 @@
+# Name: Kritika Rawat
+# Enrollment No.: 2502140034
+
+PASSWORD = "admin123"
+
+vehicles = []
+
+
+def login():
+    print("=" * 50)
+    print("  Welcome to Vehicle Management System")
+    print("=" * 50)
+
+    while True:
+        password = input("\nPlease enter password: ")
+        if password == PASSWORD:
+            print("\n✓ Login successful! Welcome!\n")
+            break
+        else:
+            print("✗ Wrong password. Please try again.")
+
+
+def show_menu():
+    print("\n" + "=" * 50)
+    print("           MAIN MENU")
+    print("=" * 50)
+    print("1. Add New Vehicle")
+    print("2. View All Vehicles")
+    print("3. Update Vehicle Details")
+    print("4. Remove Vehicle")
+    print("5. Search for a Vehicle")
+    print("6. View Summary Report")
+    print("7. Exit Program")
+    print("=" * 50)
+
+
+def add_vehicle():
+    print("\n--- Add New Vehicle ---")
+
+    make = input("Enter car brand (e.g., Toyota, Honda): ")
+    model = input("Enter model name (e.g., Camry, Civic): ")
+
+    while True:
+        year = input("Enter manufacturing year: ")
+        if year.isdigit():
+            year = int(year)
+            break
+        else:
+            print("Please enter a valid year (numbers only).")
+
+    license_plate = input("Enter license plate number: ")
+    owner_name = input("Enter owner's name: ")
+
+    vehicle = {
+        "Brand": make,
+        "Model": model,
+        "Year": year,
+        "License Plate": license_plate,
+        "Owner": owner_name
+    }
+
+    vehicles.append(vehicle)
+    print(f"\n✓ Vehicle {license_plate} added successfully!")
+
+
+def view_vehicles():
+    print("\n--- All Vehicles ---")
+
+    if len(vehicles) == 0:
+        print("No vehicles found in the system.")
+        return
+
+    for i in range(len(vehicles)):
+        print(f"\nVehicle #{i + 1}:")
+        print(f"  Brand: {vehicles[i]['Brand']}")
+        print(f"  Model: {vehicles[i]['Model']}")
+        print(f"  Year: {vehicles[i]['Year']}")
+        print(f"  License Plate: {vehicles[i]['License Plate']}")
+        print(f"  Owner: {vehicles[i]['Owner']}")
+        print("-" * 40)
+
+
+def update_vehicle():
+    print("\n--- Update Vehicle Details ---")
+
+    plate = input("Enter license plate of vehicle to update: ")
+
+    found = False
+    for vehicle in vehicles:
+        if vehicle["License Plate"] == plate:
+            found = True
+            print(f"\nVehicle found: {vehicle['Brand']} {vehicle['Model']}")
+            print("Enter new details (press Enter to keep current value):\n")
+
+            new_brand = input(f"Brand [{vehicle['Brand']}]: ")
+            if new_brand:
+                vehicle['Brand'] = new_brand
+
+            new_model = input(f"Model [{vehicle['Model']}]: ")
+            if new_model:
+                vehicle['Model'] = new_model
+
+            new_year = input(f"Year [{vehicle['Year']}]: ")
+            if new_year and new_year.isdigit():
+                vehicle['Year'] = int(new_year)
+
+            new_owner = input(f"Owner [{vehicle['Owner']}]: ")
+            if new_owner:
+                vehicle['Owner'] = new_owner
+
+            print("\n✓ Vehicle updated successfully!")
+            break
+
+    if not found:
+        print("✗ Vehicle not found in the system.")
+
+
+def delete_vehicle():
+    print("\n--- Remove Vehicle ---")
+
+    plate = input("Enter license plate of vehicle to remove: ")
+
+    found = False
+    for vehicle in vehicles:
+        if vehicle["License Plate"] == plate:
+            vehicles.remove(vehicle)
+            print(f"\n✓ Vehicle {plate} removed successfully!")
+            found = True
+            break
+
+    if not found:
+        print("✗ Vehicle not found in the system.")
+
+
+def search_vehicle():
+    print("\n--- Search Vehicle ---")
+
+    search_term = input("Enter brand, model, or owner name to search: ").lower()
+
+    found_any = False
+    print("\nSearch Results:")
+
+    for vehicle in vehicles:
+        if (search_term in vehicle['Brand'].lower() or
+                search_term in vehicle['Model'].lower() or
+                search_term in vehicle['Owner'].lower()):
+            print(f"\n  Brand: {vehicle['Brand']}")
+            print(f"  Model: {vehicle['Model']}")
+            print(f"  Year: {vehicle['Year']}")
+            print(f"  License Plate: {vehicle['License Plate']}")
+            print(f"  Owner: {vehicle['Owner']}")
+            print("-" * 40)
+            found_any = True
+
+    if not found_any:
+        print("No matching vehicles found.")
+
+
+def generate_report():
+    print("\n--- Summary Report ---")
+
+    total = len(vehicles)
+    print(f"Total number of vehicles: {total}")
+
+    if total > 0:
+        brands = []
+        for vehicle in vehicles:
+            if vehicle['Brand'] not in brands:
+                brands.append(vehicle['Brand'])
+
+        print(f"Different brands: {len(brands)}")
+        print(f"Brands in system: {', '.join(brands)}")
+    else:
+        print("No vehicles in the system yet.")
+
+
+def main():
+    login()
+
+    while True:
+        show_menu()
+        choice = input("\nEnter your choice (1-7): ")
+
+        if choice == '1':
+            add_vehicle()
+        elif choice == '2':
+            view_vehicles()
+        elif choice == '3':
+            update_vehicle()
+        elif choice == '4':
+            delete_vehicle()
+        elif choice == '5':
+            search_vehicle()
+        elif choice == '6':
+            generate_report()
+        elif choice == '7':
+            print("\nThank you for using Vehicle Management System!")
+            print("Goodbye! 👋")
+            break
+        else:
+            print("\n✗ Invalid choice. Please enter a number between 1 and 7.")
+
+
+if __name__ == "__main__":
+    main()
